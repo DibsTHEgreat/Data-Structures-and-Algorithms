@@ -129,9 +129,33 @@ class DoublyLinkedList:
             return self.prepend(value)
         if index == self.length:
             return self.append(value)
+        new_node = Node(value)
         before = self.get(index - 1)
-        after = self.get(index + 1)
+        after = before.next
+        new_node.prev = before
+        new_node.next = after
+        before.next = new_node
+        after.prev = new_node
         
+        self.length += 1
+        return True
+
+    # this function removes a node at a specified index
+    def remove(self, index):
+        if index < 0 or index >= self.length: 
+        # making sure the index is a proper value
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+        temp = self.get(index)
+        temp.next.prev = temp.prev
+        temp.prev.next = temp.next
+        temp.next = None
+        temp.prev = None
+        self.length -= 1
+        return temp
         
 # this is how we call the constructor in our code
 my_DLL = DoublyLinkedList(7)
@@ -201,4 +225,20 @@ print(my_DLL.set_value(1, 4))
 
 print('')
 print('Printing out the DLL after using the set function:')
+my_DLL.print_list()
+
+print('')
+print('Testing out the insert function by adding a node at index 1:')
+print(my_DLL.insert(1, 3))
+
+print('')
+print('Printing out the DLL after using the insert function:')
+my_DLL.print_list()
+
+print('')
+print('Testing out the remove function by removing a node at index 2:')
+print(my_DLL.remove(2))
+
+print('')
+print('Printing out the DLL after using the insert function:')
 my_DLL.print_list()
