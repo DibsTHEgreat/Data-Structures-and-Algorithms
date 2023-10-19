@@ -81,7 +81,7 @@ class DoublyLinkedList:
         else:
             self.head = self.head.next
             self.head.prev = None
-            temp.next=  None
+            temp.next = None
         self.length -= 1
         return temp.value
     # note: Same as the pop function I am only keeping
@@ -122,7 +122,7 @@ class DoublyLinkedList:
     
     # this function inserts a new node at a specified index with a inputted value
     def insert(self, index, value):
-        if index < 0 or index >= self.length: 
+        if index < 0 or index > self.length: 
         # making sure the index is a proper value
             return None
         if index == 0:
