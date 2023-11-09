@@ -75,7 +75,34 @@ class HashTable:
         # If index is equal to None, than the only thing we can 
         # return is the value None at that specific index.
         return None
-        
+    
+    # This function returns a list of keys from the hash table
+    def keys(self):
+        # For sake of simplicity, let's initialize a new variable 
+        # to contain all of the keys.
+        all_keys = []
+        # This for loop will iterate through the entire hash table
+        for i in range(len(self.data_map)):
+            # Since there is a possibility of hash tables containing 
+            # None values at specific indexes, we don't need to run
+            # these lines of code all the time.
+            if self.data_map[i] is not None:
+                # The reason we have another for loop within a for loop
+                # is to iterate through our second list at specific
+                # indexes containing values. Hence the new iterative 
+                # variable j.
+                for j in range(len(self.data_map[i])):
+                    # What this line is doing is specifically targetting
+                    # key values at a specific index, and specific spot
+                    # of a index that contains a list. Hence the [i][j];
+                    # [0] represents the key value being appended onto
+                    # all_keys variable.
+                    all_keys.append(self.data_map[i][j][0])
+        # goal of the function is to return a new list containing only 
+        # a list of keys from a hash table.
+        return all_keys
+            
+    
     
 # Creating my example Hash table
 exHashTable = HashTable()
@@ -103,10 +130,14 @@ exHashTable.print_table()
 
 # Now it is time to test out the get item function
 print('')
-print('Below contains results form our get_item function.')
+print('Below contains results from our get_item function.')
 print('')
 print('Get item, Zekrom: ', exHashTable.get_item('Zekrom'))
 print('Get item, Reshiram: ', exHashTable.get_item('Reshiram'))
 # Testing out an edge case, what will happen if we input 
 # a value not on the list?
 print('Get item, Keldeo: ', exHashTable.get_item('Keldeo'))
+
+print('')
+print('Below contains results from our keys function.')
+print(exHashTable.keys())
